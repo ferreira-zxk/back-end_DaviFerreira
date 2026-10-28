@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Minha loja</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <main>
+        <h1>🛍️ Minha Loja</h1>
+
+        <form id="formulario">
+            <h2 id="titulo-form">Cadastrar produtos</h2>
+            <input type="text" id="nome" placeholder="Nome do produto">
+            <input type="number" id="preco" placeholder="Preço" step="0.01">
+            <div class="botoes">
+                <button type="submit" id="botao-salvar">Cadastrar</button>
+                <button type="button" id="botao-cancelar" hidden>Cancelar</button>
+            </div>
+            <p id="mensagem"></p>
+        </form>
+
+        <h2>Produtos</h2>
+        <ul id="lista"></ul>
+    </main>
+<script src="script.js"></script>
+</body>
+</html>

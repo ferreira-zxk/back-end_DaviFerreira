@@ -36,7 +36,7 @@ function criarItem(produto) {
     botaoEditar.className = 'editar';
     botaoEditar.addEventListener('click', () => iniciarEdicao(produto));
 
-    const botaoApagar = document.createComment('button');
+    const botaoApagar = document.createElement('button');
     botaoApagar.textContent = 'Apagar';
     botaoApagar.className = 'apagar';
     botaoApagar.addEventListener('click', () => apagarProduto(produto));
@@ -78,7 +78,7 @@ async function salvarProduto(evento) {
         const resposta = await fetch(url, {
             method: metodo,
             headers: { 'Content-Type': 'application/json' },
-            bady: JSON.stringify(dados)
+            body: JSON.stringify(dados)
         });
         const corpo = await resposta.json();
 

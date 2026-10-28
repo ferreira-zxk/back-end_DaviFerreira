@@ -1,8 +1,35 @@
 {
-  "proximoId": 4,
+  "proximoId": 7,
   "produtos": [
-      {"id": 1, "nome": "Tec9", "preco": 1081.98 },
-      {"id": 2, "nome": "C4", "preco": 23.88 },
-      {"id": 3, "nome": "Bazuka", "preco": 7101.50 }
+    {
+      "id": 1,
+      "nome": "Tec9",
+      "preco": 1081.98
+    },
+    {
+      "id": 2,
+      "nome": "C4",
+      "preco": 23.88
+    },
+    {
+      "id": 3,
+      "nome": "Bazuka",
+      "preco": 7101.5
+    },
+    {
+      "id": 4,
+      "nome": "fdsd",
+      "preco": 0
+    },
+    {
+      "id": 5,
+      "nome": "hhgfds",
+      "preco": 0.47
+    },
+    {
+      "id": 6,
+      "nome": "7uiadijndaskjnda",
+      "preco": 12141
+    }
   ]
 }

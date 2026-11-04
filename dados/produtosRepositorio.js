@@ -1,4 +1,4 @@
-const initSqlJS = require('sql.js');
+const initSqlJs = require('sql.js');
 const fs = require('fs');
 const path = require('path');
 
@@ -6,7 +6,7 @@ const CAMINHO = path.join(__dirname, 'loja.db');
 let db;
 
 function salvarArquivo() {
-  fs.writeFileSync(CAMINHO, buffer.from(db.export()));
+  fs.writeFileSync(CAMINHO, Buffer.from(db.export()));
 }
 
 function consultar(sql, params = []) {
@@ -21,18 +21,18 @@ function consultar(sql, params = []) {
 }
 
 async function iniciar() {
-   const SQL = await initSqlJS();
+  const SQL = await initSqlJs();
   db = fs.existsSync(CAMINHO)
     ? new SQL.Database(fs.readFileSync(CAMINHO))
     : new SQL.Database();
 
   db.run(`
-     CREATE TABLE IF NOT EXISTS produtos (
+    CREATE TABLE IF NOT EXISTS produtos (
       id INTEGER PRIMARY KEY AUTOINCREMENT,
       nome TEXT NOT NULL,
       preco REAL NOT NULL
-     )
-     `);
+    )
+  `);
 
   const [{ total }] = consultar('SELECT COUNT(*) AS total FROM produtos');
   if (total === 0) {

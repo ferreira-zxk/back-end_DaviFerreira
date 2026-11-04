@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Login</title>
+  <style>
+    body { font-family: sans-serif; display: flex; justify-content: center; padding-top: 60px; background: #f2f2f2; }
+    .caixa { background: #fff; padding: 24px; border-radius: 8px; width: 320px; box-shadow: 0 2px 8px rgba(0,0,0,.1); }
+    input, button { width: 100%; padding: 10px; margin-top: 10px; box-sizing: border-box; }
+    button { cursor: pointer; }
+    a { cursor: pointer; color: #06c; font-size: 14px; }
+    #msg { margin-top: 10px; font-size: 14px; }
+  </style>
+</head>
+<body>
+  <div class="caixa">
+    <h2 id="titulo">Entrar</h2>
+    <input id="nome" placeholder="Nome" style="display:none">
+    <input id="email" type="email" placeholder="Email">
+    <input id="senha" type="password" placeholder="Senha">
+    <button id="botao">Entrar</button>
+    <p><a id="alternar">Não tem conta? Cadastre-se</a></p>
+    <div id="msg"></div>
+  </div>
+
+  <script>
+    let modoCadastro = false;
+    const $ = id => document.getElementById(id);
+
+    $('alternar').onclick = () => {
+      modoCadastro = !modoCadastro;
+      $('nome').style.display = modoCadastro ? 'block' : 'none';
+      $('titulo').textContent = modoCadastro ? 'Cadastro' : 'Entrar';
+      $('botao').textContent = modoCadastro ? 'Cadastrar' : 'Entrar';
+      $('alternar').textContent = modoCadastro ? 'Já tem conta? Entrar' : 'Não tem conta? Cadastre-se';
+      $('msg').textContent = '';
+    };
+
+    $('botao').onclick = async () => {
+      const corpo = { email: $('email').value, senha: $('senha').value };
+      if (modoCadastro) corpo.nome = $('nome').value;
+
+      const resp = await fetch(modoCadastro ? '/auth/cadastro' : '/auth/login', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(corpo)
+      });
+      const dados = await resp.json();
+
+      if (!resp.ok) { $('msg').textContent = dados.erro; return; }
+
+      if (modoCadastro) {
+        $('msg').textContent = 'Cadastro feito! Agora faça login.';
+        $('alternar').click();
+      } else {
+        localStorage.setItem('token', dados.token);
+        localStorage.setItem('nome', dados.nome);
+        $('msg').textContent = 'Login realizado! Bem-vindo, ' + dados.nome;
+      }
+    };
+  </script>
+</body>
+</html>
